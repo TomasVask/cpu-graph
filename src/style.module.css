@@ -1,0 +1,288 @@
+:root {
+    --timeRange-btn-hover: #1a63c2;
+    --timeRange-btn: #636262;
+    --cpu-util-text: #a3a0a0;
+    --viewSelect-btn-border: #dbdbdb;
+    --viewSelect-btn-background-focus: #86aaf833;
+    --viewSelect-btn-border-focus: #86aaf8;
+    --main-background: #f7f7f7;
+    --average-integer: #363636;
+    --cpuReq-background: #1569d673;
+    --cpuReq-background-stroke: #71a7eef1;
+    --area-icon_blue: url("/public/chart_line_icon_blue.svg");
+    --area-icon_grey: url("/public/chart_line_icon_grey.svg");
+    --bar-icon-blue: url("/public/bar_chart_icon_blue.svg");
+    --bar-icon-grey: url("/public/bar_chart_icon_grey.svg");
+}
+
+.body {
+    height: 100vh;
+    width: 100%;
+    background-color: #1a63c2;
+    display: flex;
+    justify-content: center;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+.main {
+    display: flex;
+    flex-flow: row;
+    background-color: var(--main-background);
+    height: 50em;
+    max-width: 14in;
+    width: 100%;
+}
+
+.sidemenu {
+    width: 16.5em;
+    height: 30em;
+    background-color: #a5d0f3;
+    text-align: center;
+    padding: 12em 0;
+}
+
+.cpuUtilization {
+    margin-top: 0.5em;
+    margin-left: 2em;
+    margin-right: 0em
+}
+
+.header {
+    font-size: 0.8em;
+    font-weight: 600;
+    color: var(--cpu-util-text);
+    margin: 0;
+}
+
+.dash_box {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 1.5px 0px 0px #b3afaf4d;
+}
+
+.dashboard {
+    display: flex;
+    flex-flow: row;
+}
+
+.dashboardMenu {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    padding-top: 0.7em;
+    margin-inline: 1.5em;
+}
+
+.timeRangeBtn {
+    width: 5.7em;
+    height: 2.8em;
+    background-color: white;
+    border-top: none;
+    border-inline: none;
+    border-bottom: none;
+    color: var(--timeRange-btn);
+    font-weight: 600;
+    font-size: 0.77em;
+}
+
+.timeRangeBtn:hover {
+    color: var(--timeRange-btn-hover);
+}
+
+.timeRangeFocused {
+    border-bottom: 1.5px solid var(--timeRange-btn-hover);
+    color: var(--timeRange-btn-hover);
+}
+
+.areaBtn,
+.barBtn {
+    height: 1.6em;
+    width: 1.6em;
+    border: 1px solid var(--viewSelect-btn-border);
+    background-color: white;
+    border-right: none;
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+.areaBtn {
+    background-image: var(--area-icon_grey);
+    border-radius: 3px 0px 0px 3px;
+}
+
+.barBtn {
+    background-image: var(--bar-icon-grey);
+    border-radius: 0px 3px 3px 0px;
+}
+
+.areaBtnFocused,
+.barBtnFocused {
+    background-color: var(--viewSelect-btn-background-focus);
+    border: 1px solid var(--viewSelect-btn-border-focus);
+    border-right: none;
+    outline: none;
+}
+
+.areaBtnFocused {
+    background-image: var(--area-icon_blue);
+}
+
+.barBtnFocused {
+    background-image: var(--bar-icon-blue);
+}
+
+.chart {
+    margin-right: 0em;
+    display: flex;
+    flex-flow: column;
+    margin-top: 0.5em;
+}
+
+.chartLayerSelect {
+    display: flex;
+    flex-flow: row;
+    align-self: flex-end;
+    margin-right: 1.5rem;
+    font-size: 0.6rem;
+    color: var(--average-integer)
+}
+
+.provCheckbox,
+.reqCheckbox {
+    display: block;
+    position: relative;
+    padding-top: 1px;
+    padding-left: 1.4rem;
+    margin-bottom: 1.2rem;
+    cursor: pointer;
+    font-size: 0.6rem;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.reqCheckbox {
+    margin-left: 2rem;
+}
+
+/* Hide the browser's default checkbox */
+.provCheckbox input,
+.reqCheckbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmarkProv,
+.checkmarkReq {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1.6em;
+    width: 1.6em;
+    background-color: white;
+    border-radius: 2px;
+    border: 1.3px solid var(--timeRange-btn-hover);
+    box-shadow: 0px 1px 1px 0px #1b68cc4d;
+}
+
+/* When the checkbox is checked, add a blue background */
+.reqCheckbox input:checked~.checkmarkReq {
+    background-color: var(--cpuReq-background);
+    border: 1px solid rgb(26, 99, 194, 0.05);
+}
+
+/* On mouse-over, add thinner border */
+.provCheckbox:hover input~.checkmarkProv,
+.reqCheckbox:hover input~.checkmarkReq {
+    border: 1.5px solid var(--timeRange-btn-hover);
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmarkProv:after,
+.checkmarkReq:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.provCheckbox input:checked~.checkmarkProv:after,
+.reqCheckbox input:checked~.checkmarkReq:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.provCheckbox .checkmarkProv:after,
+.reqCheckbox .checkmarkReq:after {
+    left: 5px;
+    top: 2px;
+    width: 4.5px;
+    height: 8px;
+    border: solid var(--timeRange-btn-hover);
+    border-width: 0 1.5px 1.5px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.avgBox {
+    margin-left: 1.5em;
+    margin-top: 2.5em;
+}
+
+.avgProvisioned {
+    margin-bottom: 1.5em;
+}
+
+.avgProvisioned p,
+.avgRequested p {
+    font-size: 0.65em;
+    margin-bottom: -0.5em;
+    letter-spacing: 0.3px;
+    color: var(--average-integer)
+}
+
+.avgProvisioned span:nth-of-type(1),
+.avgRequested span:nth-of-type(1) {
+    font-size: 1.4em;
+    font-family: 'Pathway Extreme', sans-serif;
+    font-weight: 700;
+    color: var(--average-integer)
+}
+
+.avgProvisioned span:nth-of-type(2),
+.avgRequested span:nth-of-type(2) {
+    font-size: 0.6em;
+    color: var(--cpu-util-text)
+}
+
+.provIcon,
+.reqIcon {
+    height: 2.1em;
+    border-radius: 3px 3px 3px 3px;
+    background-color: var(--main-background);
+    margin-right: 0.45em;
+    margin-top: 0.2em;
+}
+
+.provIcon {
+    width: 0.2em;
+    border: 1.3px solid var(--timeRange-btn-hover);
+}
+
+.reqIcon {
+    border: 1.4px solid var(--viewSelect-btn-border-focus);
+    width: 0.1em;
+}
+
+.avgProvGroup,
+.avgReqGroup {
+    display: flex;
+    flex-flow: row;
+}
