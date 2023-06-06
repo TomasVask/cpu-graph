@@ -20,7 +20,7 @@ Short description:
 
 ## Link
 
-- Live - (https://tomasvask.github.io/cpu-graph-with-recharts.org-lib/)
+- [Live](https://tomasvask.github.io/cpu-graph-with-recharts.org-lib/)
 
 ## Author
 
